@@ -6,32 +6,33 @@ import mhLogo from '../images/hussey.svg'
 import gtgLogo from '../images/gtg.svg'
 import miraseeLogo from '../images/mirasee.svg'
 import ruzukuLogo from '../images/ruzuku.svg'
+import { Button } from './Button'
+import { Section } from './Section'
 
 const CloudSection = () => {
     return(
-        <Section>
-            <CloudContainer>
-                <CloudLeft>
-                    <CloudHeading>Trusted by some of the web's top brands:</CloudHeading>
-                </CloudLeft>
-                <CloudRight>
-                    <CloudLogo src={ ariLogo } large="true" />
-                    <CloudLogo src={ mhLogo } />
-                    <CloudLogo src={ gtgLogo } small="true" />
-                    <CloudLogo src={ miraseeLogo } />
-                    <CloudLogo src={ ruzukuLogo } small="true" />
-                </CloudRight>
-            </CloudContainer>
-        </Section>
+        <>
+            <Section small="true">
+                <CloudContainer>
+                    <CloudLeft>
+                        <CloudHeading>Trusted by some of the web's top brands:</CloudHeading>
+                    </CloudLeft>
+                    <CloudRight>
+                        <CloudLogo src={ ariLogo } large ="true" />
+                        <CloudLogo src={ mhLogo } />
+                        <CloudLogo src={ gtgLogo } small="true" />
+                        <CloudLogo src={ miraseeLogo } small="true" />
+                        <CloudLogo src={ ruzukuLogo } xsmall="true" />
+                        <CloudLogo src={ ruzukuLogo } xsmall="true" />
+                    </CloudRight>
+                    <CloudButton primary="true">Start now</CloudButton>
+                </CloudContainer>
+            </Section>
+        </>
     )
 }
 
 export default CloudSection
-
-const Section = styled.section`
-    padding: 5rem 0;
-    background-color: #f9fafb;
-`
 
 const CloudContainer = styled(Container)`
     display: flex;
@@ -46,10 +47,32 @@ const CloudLeft = styled.div`
 `
 
 const CloudHeading = styled.h2`
-    font-size: 1.125rem;
+    position: relative;
+    font-size: 0.75rem;
     line-height: 1;
-    font-weight: 500;
-    color: #374151;
+    font-weight: 700;
+    color: var(--gray-500);
+    letter-spacing: 0.0625rem;
+    text-transform: uppercase;
+
+    ::before, ::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        display: block;
+        width: 20vw; height: 1px;
+        background-color: var(--gray-100);
+    }
+
+    ::before {
+        right: 100%;
+        margin-right: 1.25rem;
+    }
+
+    ::after {
+        left: 100%;
+        margin-left: 1.25rem;
+    }
 `
 
 const CloudRight = styled.div`
@@ -59,17 +82,18 @@ const CloudRight = styled.div`
     place-items: center;
     grid-template-rows: repeat(3, minmax(0, 1fr));
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: 2.5rem;
 
     @media screen and (min-width: 64rem) {
-        grid-template-rows: repeat(1, minmax(0, 1fr));
-        grid-template-columns: repeat(5, minmax(0, 1fr));
+        grid-template-rows: none;
+        grid-template-columns: repeat(6, minmax(0, min-content));
+        row-gap: 0;
     }
 `
 
 const CloudLogo = styled.img`
     display: inline-block;
-    width: auto; height: ${ props =>  props.small ? '2.25rem' : props.large ? '3.75rem' : '3rem'};
-    vertical-align: middle;
+    width: auto; height: ${ props => props.xsmall ? '1.75rem' : props.small ? '2rem' : props.large ? '2.75rem' : '2.5rem'};
 
     &:first-of-type {
         margin-left: 0;
@@ -79,4 +103,27 @@ const CloudLogo = styled.img`
         margin-right: 0;
     }
 
+`
+
+const CloudButton = styled(Button)`
+    position: relative;
+
+    ::before, ::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        display: block;
+        width: 20vw; height: 1px;
+        background-color: var(--gray-100);
+    }
+
+    ::before {
+        right: 100%;
+        margin-right: 1.25rem;
+    }
+
+    ::after {
+        left: 100%;
+        margin-left: 1.25rem;
+    }
 `
